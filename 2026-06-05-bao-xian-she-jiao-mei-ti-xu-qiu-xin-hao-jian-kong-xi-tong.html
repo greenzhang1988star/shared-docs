@@ -73,22 +73,77 @@
     margin: 0;
     padding: 0;
   }
-  .toc li { margin: 6px 0; }
-  .toc a {
-    color: var(--text-secondary);
+  .toc-item {
+    margin: 4px 0;
+  }
+  .toc-h2 {
+    color: var(--text);
     text-decoration: none;
-    display: block;
-    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
     border-radius: 4px;
     transition: all 0.15s;
     border-left: 2px solid transparent;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
   }
-  .toc a:hover {
+  .toc-h2::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .toc-item.expanded > .toc-h2::before {
+    transform: rotate(90deg);
+    color: var(--brand);
+  }
+  .toc-h2:hover {
     color: var(--brand);
     background: var(--bg-soft);
     border-left-color: var(--brand);
   }
-  .toc .toc-h3 { padding-left: 20px; font-size: 13px; color: var(--text-muted); }
+  .toc-item.active > .toc-h2 {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc-children {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    padding-left: 16px;
+    margin-top: 0 !important;
+  }
+  .toc-item.expanded > .toc-children {
+    max-height: 2000px;
+    transition: max-height 0.4s ease-in;
+  }
+  .toc-children li { margin: 2px 0; }
+  .toc-h3 {
+    display: block;
+    padding: 4px 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 2px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+  .toc-h3:hover {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc-h3.active {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
 
   /* ========== 主体区 ========== */
   main {
@@ -347,20 +402,36 @@
   <aside class="toc">
     <div class="toc-title">目录</div>
     <ul>
-      <li><a class="toc-h2" href="#sec-1">一、为什么做这个</a></li>
-      <li><a class="toc-h2" href="#sec-2">二、能产出什么</a></li>
-      <li><a class="toc-h3" href="#sec-3">产出1：每日异常热点 → 保险机会判断</a></li>
-      <li><a class="toc-h3" href="#sec-4">产出2：28个关键词微信指数每日追踪</a></li>
-      <li><a class="toc-h3" href="#sec-5">产出3：搜索引擎内容采集 → 用户真实声音</a></li>
-      <li><a class="toc-h2" href="#sec-6">三、数据来源与方法</a></li>
-      <li><a class="toc-h2" href="#sec-7">四、对业务的具体用处</a></li>
-      <li><a class="toc-h3" href="#sec-8">用处1：合作方向发现</a></li>
-      <li><a class="toc-h3" href="#sec-9">用处2：推进时机判断</a></li>
-      <li><a class="toc-h3" href="#sec-10">用处3：立项数据支撑</a></li>
-      <li><a class="toc-h3" href="#sec-11">用处4：风险预警</a></li>
-      <li><a class="toc-h3" href="#sec-12">用处5：内部汇报素材</a></li>
-      <li><a class="toc-h2" href="#sec-13">五、产出形式</a></li>
-      <li><a class="toc-h2" href="#sec-14">六、一句话总结</a></li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-1">一、为什么做这个</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-2">二、能产出什么</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-3">产出1：每日异常热点 → 保险机会判断</a></li>
+          <li><a class="toc-h3" href="#sec-4">产出2：28个关键词微信指数每日追踪</a></li>
+          <li><a class="toc-h3" href="#sec-5">产出3：搜索引擎内容采集 → 用户真实声音</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-6">三、数据来源与方法</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-7">四、对业务的具体用处</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-8">用处1：合作方向发现</a></li>
+          <li><a class="toc-h3" href="#sec-9">用处2：推进时机判断</a></li>
+          <li><a class="toc-h3" href="#sec-10">用处3：立项数据支撑</a></li>
+          <li><a class="toc-h3" href="#sec-11">用处4：风险预警</a></li>
+          <li><a class="toc-h3" href="#sec-12">用处5：内部汇报素材</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-13">五、产出形式</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-14">六、一句话总结</a>
+      </li>
     </ul>
   </aside>
 
@@ -571,10 +642,66 @@
     </article>
 
     <footer>
-      <p>本文档由 AI 协作生成 · 生成时间：2026-06-05 14:23</p>
+      <p>本文档由 AI 协作生成 · 生成时间：2026-06-05 16:05</p>
       <p>数据来源：微博+百度热搜+微信指数+搜索引擎</p>
     </footer>
   </main>
 </div>
+
+<script>
+  // ===== 目录折叠/手风琴交互 =====
+  document.addEventListener('DOMContentLoaded', function() {
+    const tocItems = document.querySelectorAll('.toc-item');
+
+    tocItems.forEach(function(item) {
+      const h2Link = item.querySelector('.toc-h2');
+      if (!h2Link) return;
+
+      h2Link.addEventListener('click', function(e) {
+        const isExpanded = item.classList.contains('expanded');
+
+        // 手风琴：先折叠所有
+        tocItems.forEach(function(other) {
+          other.classList.remove('expanded');
+        });
+
+        // 如果当前未展开，则展开它（再次点击同一项则收起）
+        if (!isExpanded) {
+          item.classList.add('expanded');
+        }
+        // 跳转锚点的默认行为保留，无需 preventDefault
+      });
+    });
+
+    // ===== 滚动时自动高亮当前章节 =====
+    const headings = document.querySelectorAll('article.content h2[id], article.content h3[id]');
+    const tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+
+    function updateActive() {
+      let current = '';
+      const scrollPos = window.scrollY + 120;
+      headings.forEach(function(h) {
+        if (h.offsetTop <= scrollPos) {
+          current = h.id;
+        }
+      });
+      tocLinks.forEach(function(link) {
+        link.classList.remove('active');
+        const parentItem = link.closest('.toc-item');
+        if (parentItem && link.classList.contains('toc-h2')) {
+          parentItem.classList.remove('active');
+        }
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+          if (parentItem) parentItem.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+  });
+</script>
+
 </body>
 </html>
