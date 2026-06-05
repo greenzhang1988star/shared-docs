@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保险社交媒体需求信号监控系统</title>
+<style>
+  :root {
+    --brand: #07C160;          /* 微信绿，可后续改成微保品牌色 */
+    --brand-dark: #06AD56;
+    --accent: #1A73E8;         /* 强调色（链接、关键数字） */
+    --text: #1F2329;
+    --text-secondary: #4E5969;
+    --text-muted: #86909C;
+    --bg: #FFFFFF;
+    --bg-soft: #F7F8FA;
+    --bg-card: #F5F7FA;
+    --border: #E5E6EB;
+    --border-soft: #F2F3F5;
+    --shadow: 0 2px 8px rgba(0,0,0,0.04);
+    --tldr-bg: #FFF8E6;
+    --tldr-border: #F2C94C;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-soft);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ========== 整体布局 ========== */
+  .layout {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+
+  /* ========== 左侧目录 ========== */
+  .toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 20px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    font-size: 14px;
+  }
+  .toc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc li { margin: 6px 0; }
+  .toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .toc a:hover {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc .toc-h3 { padding-left: 20px; font-size: 13px; color: var(--text-muted); }
+
+  /* ========== 主体区 ========== */
+  main {
+    background: var(--bg);
+    padding: 48px 56px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin: 24px 0;
+  }
+
+  /* ========== 顶部 header ========== */
+  .doc-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .doc-meta-tag {
+    display: inline-block;
+    background: var(--brand);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .doc-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+  .doc-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+  }
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .doc-meta span::before {
+    content: "·";
+    margin-right: 8px;
+    color: var(--border);
+  }
+  .doc-meta span:first-child::before { display: none; }
+
+  /* ========== TL;DR 卡片 ========== */
+  .tldr {
+    background: var(--tldr-bg);
+    border-left: 4px solid var(--tldr-border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0 32px 0;
+  }
+  .tldr-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #B68900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .tldr-content {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .tldr-content p { margin: 6px 0; }
+  .tldr-content ul { margin: 6px 0; padding-left: 20px; }
+
+  /* ========== 标题层级 ========== */
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 36px;
+    margin-bottom: 14px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* ========== 段落 + 文字 ========== */
+  p { margin: 12px 0; color: var(--text); }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--text-secondary); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* 关键数字高亮 */
+  .highlight, mark {
+    background: linear-gradient(180deg, transparent 60%, rgba(7,193,96,0.18) 60%);
+    color: var(--text);
+    padding: 0 2px;
+    font-weight: 600;
+  }
+
+  /* ========== 列表 ========== */
+  ul, ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  li { margin: 6px 0; }
+  li > ul, li > ol { margin: 4px 0; }
+
+  /* ========== 表格 ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: var(--bg);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  thead {
+    background: var(--bg-card);
+  }
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-soft); }
+
+  /* ========== 引用 ========== */
+  blockquote {
+    border-left: 4px solid var(--brand);
+    background: var(--bg-soft);
+    padding: 12px 20px;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: normal;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p { margin: 4px 0; }
+
+  /* ========== 代码 ========== */
+  code {
+    background: var(--bg-card);
+    color: #D63384;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: "SF Mono", Consolas, "Microsoft YaHei Mono", monospace;
+  }
+  pre {
+    background: #1E2329;
+    color: #E5E6EB;
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  /* ========== 分隔线 ========== */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 36px 0;
+  }
+
+  /* ========== 页脚 ========== */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  footer p { margin: 4px 0; color: var(--text-muted); }
+
+  /* ========== 响应式：手机端 ========== */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 16px;
+    }
+    .toc {
+      position: relative;
+      max-height: none;
+      margin: 16px 0 0;
+      top: 0;
+    }
+    main {
+      padding: 32px 24px;
+      margin: 16px 0;
+    }
+    .doc-title { font-size: 24px; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 17px; }
+    table { font-size: 13px; }
+    th, td { padding: 10px 12px; }
+  }
+
+  /* ========== 打印样式 ========== */
+  @media print {
+    body { background: white; }
+    .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    main { box-shadow: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <!-- 左侧目录 -->
+  <aside class="toc">
+    <div class="toc-title">目录</div>
+    <ul>
+      <li><a class="toc-h2" href="#sec-1">一、为什么做这个</a></li>
+      <li><a class="toc-h2" href="#sec-2">二、能产出什么</a></li>
+      <li><a class="toc-h3" href="#sec-3">产出1：每日异常热点 → 保险机会判断</a></li>
+      <li><a class="toc-h3" href="#sec-4">产出2：28个关键词微信指数每日追踪</a></li>
+      <li><a class="toc-h3" href="#sec-5">产出3：搜索引擎内容采集 → 用户真实声音</a></li>
+      <li><a class="toc-h2" href="#sec-6">三、数据来源与方法</a></li>
+      <li><a class="toc-h2" href="#sec-7">四、对业务的具体用处</a></li>
+      <li><a class="toc-h3" href="#sec-8">用处1：合作方向发现</a></li>
+      <li><a class="toc-h3" href="#sec-9">用处2：推进时机判断</a></li>
+      <li><a class="toc-h3" href="#sec-10">用处3：立项数据支撑</a></li>
+      <li><a class="toc-h3" href="#sec-11">用处4：风险预警</a></li>
+      <li><a class="toc-h3" href="#sec-12">用处5：内部汇报素材</a></li>
+      <li><a class="toc-h2" href="#sec-13">五、产出形式</a></li>
+      <li><a class="toc-h2" href="#sec-14">六、一句话总结</a></li>
+    </ul>
+  </aside>
+
+  <!-- 主体 -->
+  <main>
+    <header class="doc-header">
+      <div class="doc-meta-tag">工具介绍</div>
+      <h1 class="doc-title">保险社交媒体需求信号监控系统</h1>
+      <p class="doc-subtitle">数据驱动的BD合作方向发现工具</p>
+      <div class="doc-meta">
+        <span>作者：微保 BD</span>
+        <span>日期：2026-06-05</span>
+        <span>主题：监控系统/工具介绍</span>
+      </div>
+    </header>
+
+    
+
+    <article class="content">
+      <h2 id="sec-1">一、为什么做这个</h2>
+<p>我们做BD，核心竞争力不是"认识谁"，而是<strong>比合作方更早发现市场需求变化</strong>。</p>
+<p>当前痛点：<br />
+- 找合作方向靠"拍脑袋"或看竞品动作（信息差 = 0）<br />
+- 用户真实需求散落在微信、微博、百度等社交媒体里，没人系统性地收集<br />
+- 等到需求被行业报告/竞品验证，窗口期已过</p>
+<p>这个监控系统的定位：<strong>每天自动帮我"听"社交媒体上用户在聊什么跟保险有关的事</strong>，从中提取可执行的商业信号。</p>
+<hr />
+<h2 id="sec-2">二、能产出什么</h2>
+<h3 id="sec-3">产出1：每日异常热点 → 保险机会判断</h3>
+<p>从微博热搜+百度热搜中，自动筛选出与保险场景相关的热点事件。</p>
+<p><strong>示例（2026-05-23 实际采集结果）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>热点事件</th>
+<th>热度</th>
+<th>保险机会判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>山西煤矿瓦斯爆炸90人死亡</td>
+<td>790万</td>
+<td>团体意外险/雇主责任险讨论窗口期</td>
+</tr>
+<tr>
+<td>暴雨大风冰雹预警</td>
+<td>637万</td>
+<td>车险/家财险报案高峰前兆</td>
+</tr>
+<tr>
+<td>2岁男孩罕见病遭保险拒赔（法院判赔100万）</td>
+<td>330万</td>
+<td>重疾险理赔争议热点，用户认知教育时机</td>
+</tr>
+<tr>
+<td>孕妻脑梗变"3岁"丈夫不离不弃</td>
+<td>38万</td>
+<td>健康险需求情绪触发</td>
+</tr>
+</tbody>
+</table>
+<p><strong>价值</strong>：不需要预判什么词会火。暴雨来了、矿难发生、保险纠纷上热搜——第一时间捕捉到，并评估"这事跟我们手上哪个项目有关"。</p>
+<hr />
+<h3 id="sec-4">产出2：28个关键词微信指数每日追踪</h3>
+<p>覆盖三类词：行业温度计、生活场景、新兴趋势。</p>
+<p><strong>示例（2026-05-23 实际数据）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>微信指数</th>
+<th>日环比</th>
+<th>信号含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>退保</td>
+<td>2,143,049</td>
+<td><strong>+40%</strong></td>
+<td>异常升温，可能有舆情事件</td>
+</tr>
+<tr>
+<td>宠物经济</td>
+<td>604,152</td>
+<td><strong>+153%</strong></td>
+<td>赛道情绪爆发</td>
+</tr>
+<tr>
+<td>养老</td>
+<td>195,810,609</td>
+<td>+25.5%</td>
+<td>持续高位，政策/社会话题驱动</td>
+</tr>
+<tr>
+<td>独居老人</td>
+<td>5,494,587</td>
+<td>+50.3%</td>
+<td>银发场景需求上升</td>
+</tr>
+<tr>
+<td>手机碎屏</td>
+<td>11,055</td>
+<td>+126%</td>
+<td>小众但涨幅异常</td>
+</tr>
+<tr>
+<td>演唱会</td>
+<td>170,424,514</td>
+<td>持平</td>
+<td>稳定高位（票务险基本盘）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>价值</strong>：当某个词连续多天异常增长，说明用户端有真实需求在升温，是场景险立项/推进的最佳时机。</p>
+<hr />
+<h3 id="sec-5">产出3：搜索引擎内容采集 → 用户真实声音</h3>
+<p>每天从搜狗微信公众号、百度等采集用户讨论保险的真实内容。</p>
+<p>覆盖四个维度：<br />
+- <strong>场景需求</strong>：用户在什么场景下表达保险需求（"演唱会去不了怎么办"、"宠物看病太贵"）<br />
+- <strong>险种热度</strong>：哪些具体险种正在被讨论（退票险、宠物险、骑行险…）<br />
+- <strong>痛点吐槽</strong>：用户对保险体验的不满（"理赔太难"、"条款看不懂"）<br />
+- <strong>认知变化</strong>：用户对保险态度的迁移（"后悔没买保险"、"年轻人要不要买保险"）</p>
+<hr />
+<h2 id="sec-6">三、数据来源与方法</h2>
+<table>
+<thead>
+<tr>
+<th>数据源</th>
+<th>采集方式</th>
+<th>频率</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微博热搜 Top 50</td>
+<td>官方AJAX接口</td>
+<td>每日</td>
+<td>⭐⭐⭐ 实时公众关注度</td>
+</tr>
+<tr>
+<td>百度热搜 Top 50</td>
+<td>公开页面解析</td>
+<td>每日</td>
+<td>⭐⭐⭐ 搜索行为真实反映</td>
+</tr>
+<tr>
+<td>微信指数</td>
+<td>官方小程序+自动化提取</td>
+<td>每日28词</td>
+<td>⭐⭐⭐ 微信生态内真实热度</td>
+</tr>
+<tr>
+<td>搜狗微信搜索</td>
+<td>公众号文章采集</td>
+<td>每日轮换</td>
+<td>⭐⭐⭐ 微信公众号内容唯一外部入口</td>
+</tr>
+<tr>
+<td>百度搜索</td>
+<td>网页结果采集</td>
+<td>每日轮换</td>
+<td>⭐⭐ 全网内容补充</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键技术处理</strong>：<br />
+- 热搜事件自动聚合（一个矿难事件15条热搜合并为1条洞察，不重复计数）<br />
+- 强/弱信号分级（"保险拒赔"是强信号直接采纳，"酒店"是弱信号需搭配损害语境）<br />
+- 噪声过滤（娱乐八卦、股市行情、军事政治自动排除）<br />
+- 历史去重（同一篇文章不会重复计入统计）</p>
+<hr />
+<h2 id="sec-7">四、对业务的具体用处</h2>
+<h3 id="sec-8">用处1：合作方向发现</h3>
+<blockquote>
+<p>发现"宠物经济"指数+153%、"独居老人"+50% → 验证宠物险赛道、银发场景值得加速推进</p>
+</blockquote>
+<h3 id="sec-9">用处2：推进时机判断</h3>
+<blockquote>
+<p>发现"退票"指数持续高位 + 热搜出现演唱会取消事件 → 跟鹅票票推进退票险的最佳沟通时机</p>
+</blockquote>
+<h3 id="sec-10">用处3：立项数据支撑</h3>
+<blockquote>
+<p>"过去30天，微信指数中'骑行'稳定在6500万+，'运动受伤'周均增长15%"→ 运动险立项有数据底</p>
+</blockquote>
+<h3 id="sec-11">用处4：风险预警</h3>
+<blockquote>
+<p>"退保"指数异常+40% → 提醒关注是否有负面舆情影响在保产品</p>
+</blockquote>
+<h3 id="sec-12">用处5：内部汇报素材</h3>
+<blockquote>
+<p>周报中引用真实数据和用户原话，比"我觉得这个方向有机会"更有说服力</p>
+</blockquote>
+<hr />
+<h2 id="sec-13">五、产出形式</h2>
+<ul>
+<li><strong>每日</strong>：数据自动采集存档（JSON），有异常信号时人工产出1-2句结论</li>
+<li><strong>每周</strong>：AI辅助分析周报，提炼本周核心发现、趋势变化、对手上项目的关联建议</li>
+<li><strong>按需</strong>：针对具体项目（如鹅票票退票险）拉取相关维度的历史数据支撑</li>
+</ul>
+<p>所有结论性内容存放在思源笔记 <code>Inbox/保险舆情监控/</code> 目录下，方便随时调取。</p>
+<hr />
+<h2 id="sec-14">六、一句话总结</h2>
+<p><strong>这个系统让我们从"有感觉、凭经验"变成"有数据、有依据"去判断保险场景机会。</strong></p>
+<p>每天5分钟自动跑完，产出的不是一堆原始数据，而是"今天社交媒体上发生了什么跟保险有关的事、哪些用户需求在升温"的直接结论。</p>
+    </article>
+
+    <footer>
+      <p>本文档由 AI 协作生成 · 生成时间：2026-06-05 14:23</p>
+      <p>数据来源：微博+百度热搜+微信指数+搜索引擎</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道8天亲子自驾行程方案 V7.2（修订版）</title>
+<style>
+  :root {
+    --brand: #07C160;          /* 微信绿，可后续改成微保品牌色 */
+    --brand-dark: #06AD56;
+    --accent: #1A73E8;         /* 强调色（链接、关键数字） */
+    --text: #1F2329;
+    --text-secondary: #4E5969;
+    --text-muted: #86909C;
+    --bg: #FFFFFF;
+    --bg-soft: #F7F8FA;
+    --bg-card: #F5F7FA;
+    --border: #E5E6EB;
+    --border-soft: #F2F3F5;
+    --shadow: 0 2px 8px rgba(0,0,0,0.04);
+    --tldr-bg: #FFF8E6;
+    --tldr-border: #F2C94C;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-soft);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ========== 整体布局 ========== */
+  .layout {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+
+  /* ========== 左侧目录 ========== */
+  .toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 20px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    font-size: 14px;
+  }
+  .toc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-item {
+    margin: 4px 0;
+  }
+  .toc-h2 {
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toc-h2::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .toc-item.expanded > .toc-h2::before {
+    transform: rotate(90deg);
+    color: var(--brand);
+  }
+  .toc-h2:hover {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc-item.active > .toc-h2 {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc-children {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    padding-left: 16px;
+    margin-top: 0 !important;
+  }
+  .toc-item.expanded > .toc-children {
+    max-height: 2000px;
+    transition: max-height 0.4s ease-in;
+  }
+  .toc-children li { margin: 2px 0; }
+  .toc-h3 {
+    display: block;
+    padding: 4px 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 2px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+  .toc-h3:hover {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+  .toc-h3.active {
+    color: var(--brand);
+    background: var(--bg-soft);
+    border-left-color: var(--brand);
+  }
+
+  /* ========== 主体区 ========== */
+  main {
+    background: var(--bg);
+    padding: 48px 56px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin: 24px 0;
+  }
+
+  /* ========== 顶部 header ========== */
+  .doc-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .doc-meta-tag {
+    display: inline-block;
+    background: var(--brand);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .doc-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+  .doc-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+  }
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .doc-meta span::before {
+    content: "·";
+    margin-right: 8px;
+    color: var(--border);
+  }
+  .doc-meta span:first-child::before { display: none; }
+
+  /* ========== TL;DR 卡片 ========== */
+  .tldr {
+    background: var(--tldr-bg);
+    border-left: 4px solid var(--tldr-border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0 32px 0;
+  }
+  .tldr-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #B68900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .tldr-content {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .tldr-content p { margin: 6px 0; }
+  .tldr-content ul { margin: 6px 0; padding-left: 20px; }
+
+  /* ========== 标题层级 ========== */
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 36px;
+    margin-bottom: 14px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* ========== 段落 + 文字 ========== */
+  p { margin: 12px 0; color: var(--text); }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--text-secondary); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* 关键数字高亮 */
+  .highlight, mark {
+    background: linear-gradient(180deg, transparent 60%, rgba(7,193,96,0.18) 60%);
+    color: var(--text);
+    padding: 0 2px;
+    font-weight: 600;
+  }
+
+  /* ========== 列表 ========== */
+  ul, ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  li { margin: 6px 0; }
+  li > ul, li > ol { margin: 4px 0; }
+
+  /* ========== 表格 ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: var(--bg);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  thead {
+    background: var(--bg-card);
+  }
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-soft); }
+
+  /* ========== 引用 ========== */
+  blockquote {
+    border-left: 4px solid var(--brand);
+    background: var(--bg-soft);
+    padding: 12px 20px;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: normal;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p { margin: 4px 0; }
+
+  /* ========== 代码 ========== */
+  code {
+    background: var(--bg-card);
+    color: #D63384;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: "SF Mono", Consolas, "Microsoft YaHei Mono", monospace;
+  }
+  pre {
+    background: #1E2329;
+    color: #E5E6EB;
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  /* ========== 分隔线 ========== */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 36px 0;
+  }
+
+  /* ========== 页脚 ========== */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  footer p { margin: 4px 0; color: var(--text-muted); }
+
+  /* ========== 响应式：手机端 ========== */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 16px;
+    }
+    .toc {
+      position: relative;
+      max-height: none;
+      margin: 16px 0 0;
+      top: 0;
+    }
+    main {
+      padding: 32px 24px;
+      margin: 16px 0;
+    }
+    .doc-title { font-size: 24px; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 17px; }
+    table { font-size: 13px; }
+    th, td { padding: 10px 12px; }
+  }
+
+  /* ========== 打印样式 ========== */
+  @media print {
+    body { background: white; }
+    .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    main { box-shadow: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <!-- 左侧目录 -->
+  <aside class="toc">
+    <div class="toc-title">目录</div>
+    <ul>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-1">一、版本演进</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-2">二、8天行程总览</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-3">三、🌟 入住后立即向前台确认的事项（重要！）</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-4">四、详细行程</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-5">🛬 Day 1（7/12 周日）：抵达 → 直奔留寿都</a></li>
+          <li><a class="toc-h3" href="#sec-6">🏊 Day 2（7/13 周一）：度假村休闲日（不进游乐园）</a></li>
+          <li><a class="toc-h3" href="#sec-7">🎢 Day 3（7/14 周二）：全天游乐园（一日通票畅玩）</a></li>
+          <li><a class="toc-h3" href="#sec-8">⛵ Day 4（7/15 周三）：洞爷湖北面深度（一日游）</a></li>
+          <li><a class="toc-h3" href="#sec-9">♨️ Day 5（7/16 周四）：水之謌泡汤+自助 → 支笏湖周边深度+人气晚餐</a></li>
+          <li><a class="toc-h3" href="#sec-10--day-6717-周五上午-mount-isola-登山--下午花田牧场组合">🥾 Day 6（7/17 周五）：上午 Mount Isola 登山 + 下午花田牧场组合</a></li>
+          <li><a class="toc-h3" href="#sec-11">🥃 Day 7（7/18 周六）：余市NIKKA + 小樽（一日往返）</a></li>
+          <li><a class="toc-h3" href="#sec-12">✈️ Day 8（7/19 周日）：留寿都晨间休闲 → 直奔机场</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-13">五、住宿规划</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-14">留寿都度假村（7晚 7/12-7/18，已订）</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-15">六、所有预约事项汇总（按紧急度）</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-16">🔴 紧急（本周内）</a></li>
+          <li><a class="toc-h3" href="#sec-17">🟡 5月底前</a></li>
+          <li><a class="toc-h3" href="#sec-18">🟢 6月（重点）</a></li>
+          <li><a class="toc-h3" href="#sec-19">✅ 不需要预约（现场买票/免费）</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-20">七、预算估算（4人，单位：人民币）</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-21">八、IDP 风险（关键卡点 — 本周必须解决）</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-22">九、应急/注意事项</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-23">驾驶</a></li>
+          <li><a class="toc-h3" href="#sec-24">孩子</a></li>
+          <li><a class="toc-h3" href="#sec-25">钱包</a></li>
+          <li><a class="toc-h3" href="#sec-26">日期/时区</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-27">十、行李建议</a>
+        <ul class="toc-children">
+          <li><a class="toc-h3" href="#sec-28">必带</a></li>
+          <li><a class="toc-h3" href="#sec-29">装备</a></li>
+          <li><a class="toc-h3" href="#sec-30">孩子专项</a></li>
+        </ul>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-31">十一、本方案的核心判断</a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-h2" href="#sec-32">十二、V7.1 → V7.2 变化总览</a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- 主体 -->
+  <main>
+    <header class="doc-header">
+      <div class="doc-meta-tag">行程方案 V7.2</div>
+      <h1 class="doc-title">北海道8天亲子自驾行程方案 V7.2（修订版）</h1>
+      <p class="doc-subtitle">2026年7月12-19日 · 2大2小亲子家庭出行</p>
+      <div class="doc-meta">
+        <span>作者：家庭出行规划</span>
+        <span>日期：2026-06-05</span>
+        <span>主题：旅行/北海道</span>
+      </div>
+    </header>
+
+    
+
+    <article class="content">
+      <p><strong>出行日期</strong>：2026年7月12日（周日）— 7月19日（周日），8天7晚<br />
+<strong>家庭成员</strong>：2大2小（大女儿四年级 9-10岁，小女儿一年级 6-7岁）<br />
+<strong>出发地</strong>：香港<br />
+<strong>核心定位</strong>：留寿都度假村7晚连住为大本营；游乐园集中一天玩到爽；Day 5 支笏湖深度+晚餐人气美食；Day 6 登山+花田牧场组合<br />
+<strong>版本说明</strong>：V7.2 在 V7.1 基础上修订 —— Day 5 砍掉熊牧场改支笏湖周边深度游+人气晚餐；Day 6 改为登山+真狩花卉中心+二世谷高桥牧场（替代细川农园摘瓜+京极喷出公园）。</p>
+<hr />
+<h2 id="sec-1">一、版本演进</h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>核心变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1-V3</td>
+<td>早期规划，含富良野远征</td>
+</tr>
+<tr>
+<td>V4</td>
+<td>朋友建议大改，但<strong>预算误算</strong></td>
+</tr>
+<tr>
+<td>V5</td>
+<td>修正预算，Day 7 含札幌</td>
+</tr>
+<tr>
+<td>V6</td>
+<td>Day 1 加支笏湖住宿</td>
+</tr>
+<tr>
+<td>V7</td>
+<td>留寿都7晚回归 + 支笏湖改 Day 5 一日游+熊牧场</td>
+</tr>
+<tr>
+<td>V7.1</td>
+<td>游乐园集中 Day 3 + 入住前台确认清单</td>
+</tr>
+<tr>
+<td><strong>V7.2（本版）</strong></td>
+<td>Day 5 砍熊牧场改支笏湖周边深度+人气晚餐；Day 6 改花田牧场组合</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-2">二、8天行程总览</h2>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>日期</th>
+<th>主活动</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>7/12 周日</td>
+<td>抵达→<strong>直奔留寿都</strong></td>
+<td>🟢 低</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7/13 周一</td>
+<td><strong>酒店泳池+温泉+SPA可选+散步</strong>（不进游乐园）</td>
+<td>🟢 低</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7/14 周二</td>
+<td><strong>全天游乐园</strong>（一日通票畅玩）</td>
+<td>🟡 中</td>
+</tr>
+<tr>
+<td>4</td>
+<td>7/15 周三</td>
+<td><strong>洞爷湖北面深度</strong>（90min含中岛游船+Sairo+Lakehill Farm）</td>
+<td>🟡 中</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7/16 周四</td>
+<td><strong>水之謌泡汤+自助 → 支笏湖周边深度+人气晚餐</strong></td>
+<td>🟢 低</td>
+</tr>
+<tr>
+<td>6</td>
+<td>7/17 周五</td>
+<td><strong>上午Mount Isola登山 + 下午真狩花卉中心+二世谷高桥牧场</strong></td>
+<td>🟡 中</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7/18 周六</td>
+<td><strong>余市NIKKA + 小樽</strong>（玻璃观看免费+音乐盒堂+LeTAO）</td>
+<td>🟡 中</td>
+</tr>
+<tr>
+<td>8</td>
+<td>7/19 周日</td>
+<td>度假村晨间休闲→直奔机场</td>
+<td>🟢 低</td>
+</tr>
+</tbody>
+</table>
+<p><strong>节奏</strong>：4天🟢低 + 4天🟡中 + 0天高 = 度假节奏（比V7.1更松，Day 5 不跑熊牧场）</p>
+<hr />
+<h2 id="sec-3">三、🌟 入住后立即向前台确认的事项（重要！）</h2>
+<p>抵达留寿都 Check in 后，<strong>第一时间向前台问清楚以下事项</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>确认事项</th>
+<th>为什么重要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>水滑梯/水公园（Splash Park）在哪里？是否包含在游乐园一日通票里？</strong></td>
+<td>决定 Day 2 是否能玩水滑梯</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>住客买游乐园票是否有优惠？（折扣/买二送一/家庭套票）</strong></td>
+<td>4人通票 ¥22,000日元，住客优惠可能省 ¥3,000-5,000日元</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>SPA 这几天是否还有空位？项目和价格？最晚预约时间？</strong></td>
+<td>决定 Day 2 是否做SPA</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>烟花秀的具体时间</strong></td>
+<td>通常 20:30，约20min</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>East Mountain Gondola 缆车的运营时间、价格、住客优惠</strong></td>
+<td>决定 Day 6 上午登山时间</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>度假村内动物互动区/Astro Tube夏季滑道/小型卡丁车 等其他活动</strong></td>
+<td>Day 2 备选活动</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>度假村到游乐园/缆车站的接驳车时刻表</strong></td>
+<td>Day 3、Day 6 步行 vs 接驳车</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Day 8（7/19）是否可延迟退房？</strong></td>
+<td>Day 8 上午要泡最后一次温泉</td>
+</tr>
+</tbody>
+</table>
+<p><strong>操作建议</strong>：拿小本子或手机备忘录记录答案。</p>
+<hr />
+<h2 id="sec-4">四、详细行程</h2>
+<h3 id="sec-5">🛬 Day 1（7/12 周日）：抵达 → 直奔留寿都</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:45</td>
+<td>HX608 香港起飞</td>
+<td>已订</td>
+</tr>
+<tr>
+<td>14:55</td>
+<td>抵达新千岁机场（JST）</td>
+<td></td>
+</tr>
+<tr>
+<td>15:00-15:45</td>
+<td>入境+取行李</td>
+<td>暑期高峰可能延长</td>
+</tr>
+<tr>
+<td>15:45-16:30</td>
+<td>取车（机场租车点）</td>
+<td>携程已订</td>
+</tr>
+<tr>
+<td>16:30-18:30</td>
+<td>自驾→留寿都（约90km / 2h）</td>
+<td>经道央自动车道+国道230</td>
+</tr>
+<tr>
+<td>18:30</td>
+<td><strong>留寿都 Check in（7晚连住开始）</strong></td>
+<td><strong>此时向前台确认章节三的8件事！</strong></td>
+</tr>
+<tr>
+<td>19:00-20:30</td>
+<td>度假村晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30-20:50</td>
+<td>夏日烟花秀</td>
+<td>阳台/泳池边可看</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sec-6">🏊 Day 2（7/13 周一）：度假村休闲日（不进游乐园）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:30-10:00</td>
+<td>慢享早餐</td>
+<td></td>
+</tr>
+<tr>
+<td>10:00-12:30</td>
+<td><strong>酒店泳池</strong>（Westin Rusutsu Pool）+ 孩子游戏区</td>
+<td>住客免费</td>
+</tr>
+<tr>
+<td>12:30-13:30</td>
+<td>度假村午餐</td>
+<td></td>
+</tr>
+<tr>
+<td>13:30-15:30</td>
+<td>大人 <strong>SPA可选</strong> + 孩子室内游戏区 / 全家小动物互动区</td>
+<td>看下方预约</td>
+</tr>
+<tr>
+<td>15:30-17:30</td>
+<td>度假村内<strong>散步、Astro Tube、小卡丁车</strong>等住客权益项目</td>
+<td>看前台确认有哪些</td>
+</tr>
+<tr>
+<td>17:30-18:30</td>
+<td>大浴场+温泉泡汤</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30-20:00</td>
+<td>晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>烟花</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 SPA（可选）</strong>：<br />
+- <strong>预约路径</strong>：rusutsu.com → Activities → Spa；或入住后前台预约/房间内拨0<br />
+- <strong>估算价格</strong>：60min按摩 ¥10,000-12,000/人；90min ¥15,000-18,000/人<br />
+- <strong>最晚预约</strong>：入住当天预约次日；旺季建议<strong>提前1周以上</strong></p>
+<hr />
+<h3 id="sec-7">🎢 Day 3（7/14 周二）：全天游乐园（一日通票畅玩）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:00-09:30</td>
+<td>早餐</td>
+<td>不赶</td>
+</tr>
+<tr>
+<td>09:30-09:50</td>
+<td>步行/接驳车至游乐园入口</td>
+<td></td>
+</tr>
+<tr>
+<td>10:00</td>
+<td><strong>游乐园开园</strong>，购买一日通票入园</td>
+<td>见下方</td>
+</tr>
+<tr>
+<td>10:00-12:30</td>
+<td>上午畅玩：4D摩天轮、过山车、儿童区、其他设施</td>
+<td>重点项目优先</td>
+</tr>
+<tr>
+<td>12:30-13:30</td>
+<td>园内午餐</td>
+<td></td>
+</tr>
+<tr>
+<td>13:30-15:30</td>
+<td>下午畅玩：<strong>水滑梯/Splash Park</strong>（如有）、其他重玩项目</td>
+<td>带泳衣</td>
+</tr>
+<tr>
+<td>15:30-17:30</td>
+<td>继续畅玩 + 纪念品店</td>
+<td></td>
+</tr>
+<tr>
+<td>17:30</td>
+<td>闭园前离场</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30-20:00</td>
+<td>度假村晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>烟花</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 Rusutsu Adventure Park 一日通票</strong>：<br />
+- <strong>购票</strong>：✅ <strong>现场购买</strong>；或在前台问是否有住客优惠票<br />
+- <strong>估算价格</strong>：成人 ¥6,200 / 儿童 ¥4,800；4人共 ¥22,000日元 ≈ <strong>人民币 ¥1,100</strong><br />
+- <strong>官网核实</strong>：rusutsu.com → Summer → Park<br />
+- <strong>运营时间</strong>：通常 10:00-17:30<br />
+- <strong>当天有效</strong>：通票仅当日有效</p>
+<p><strong>⚠️ 雨天预案</strong>：如全天大雨 → 改室内活动，游乐园挪到 Day 6（牺牲花田牧场）</p>
+<hr />
+<h3 id="sec-8">⛵ Day 4（7/15 周三）：洞爷湖北面深度（一日游）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:00-09:00</td>
+<td>早餐</td>
+<td></td>
+</tr>
+<tr>
+<td>09:00-10:00</td>
+<td>自驾→洞爷湖游船码头（约45km）</td>
+<td></td>
+</tr>
+<tr>
+<td>10:00-11:30</td>
+<td><strong>洞爷湖游船 90min 含中岛登陆</strong></td>
+<td>见下方</td>
+</tr>
+<tr>
+<td>11:30-13:00</td>
+<td>洞爷湖温泉街午餐</td>
+<td></td>
+</tr>
+<tr>
+<td>13:00-14:00</td>
+<td><strong>Lakehill Farm</strong>：午后冰淇淋+牧场风光+花田观赏区</td>
+<td>7月薰衣草+其他花</td>
+</tr>
+<tr>
+<td>14:00-15:00</td>
+<td><strong>洞爷湖 Sairo展望台</strong>（北岸最佳观景点）</td>
+<td>湖+羊蹄山+昭和新山三景同框</td>
+</tr>
+<tr>
+<td>15:00-16:00</td>
+<td>自驾返留寿都</td>
+<td></td>
+</tr>
+<tr>
+<td>16:00-18:00</td>
+<td>度假村泡汤、休息</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30-20:00</td>
+<td>晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>烟花</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 洞爷湖游船（90min含中岛登陆）</strong>：<br />
+- <strong>预约</strong>：通常<strong>现场买票</strong>即可（旺季建议早班9:30-10:00）<br />
+- <strong>估算价格</strong>：成人 ¥1,500，儿童 ¥750<br />
+- <strong>官网核实</strong>：toyakokisen.com</p>
+<hr />
+<h3 id="sec-9">♨️ Day 5（7/16 周四）：水之謌泡汤+自助 → 支笏湖周边深度+人气晚餐</h3>
+<p><strong>总里程</strong>：留寿都→水之謌→留寿都 约 180km<br />
+<strong>全天驾驶</strong>：约 4h（拆成 2-2 小时 2 段）<br />
+<strong>调整说明</strong>：删除昭和新山熊牧场，改为支笏湖周边深度玩+人气晚餐</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:00-09:00</td>
+<td>早餐+出发准备</td>
+<td></td>
+</tr>
+<tr>
+<td>09:00-11:00</td>
+<td>自驾→<strong>水之謌</strong>（约90km / 2h）</td>
+<td>经千岁市方向</td>
+</tr>
+<tr>
+<td>11:00-12:30</td>
+<td><strong>泡汤</strong></td>
+<td>大浴场+露天风吕</td>
+</tr>
+<tr>
+<td>12:30-14:00</td>
+<td><strong>午餐自助</strong>（buffet ランチ）</td>
+<td>海鲜+和食</td>
+</tr>
+<tr>
+<td>14:00-15:30</td>
+<td><strong>支笏湖湖畔散步+游船</strong>（30min湖上观鱼）</td>
+<td>支笏湖是日本透明度最高的湖</td>
+</tr>
+<tr>
+<td>15:30-16:30</td>
+<td><strong>苔の回廊</strong>（轻度自然徒步）</td>
+<td>火山熔岩苔藓峡谷，10-15min走完</td>
+</tr>
+<tr>
+<td>16:30-17:00</td>
+<td>支笏湖 Visitor Center 休息</td>
+<td></td>
+</tr>
+<tr>
+<td>17:00-18:30</td>
+<td><strong>支笏湖温泉街人气晚餐</strong>（推荐：姫鱒料理）</td>
+<td>见下方推荐</td>
+</tr>
+<tr>
+<td>18:30-20:30</td>
+<td>自驾返留寿都（约90km / 2h）</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>抵达留寿都，简单泡汤休息</td>
+<td>可能错过烟花</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 水之謌（しこつ湖鶴雅リゾートスパ 水の謌）日帰りプラン</strong>：<br />
+- ⚠️ <strong>必须提前预约</strong><br />
+- <strong>预约路径</strong>：<br />
+  - 官网：mizunouta.jp（搜"日帰り"或"ランチプラン"）<br />
+  - 鶴雅集团统一预约：tsuruga.com<br />
+  - 电话：<strong>+81-123-25-2211</strong><br />
+  - KKday/KLOOK 搜"水之謌 日帰り"<br />
+- <strong>估算价格</strong>：泡汤+午餐自助 约 ¥4,000-6,000/人，4人共 <strong>人民币¥800-1,200</strong><br />
+- <strong>最晚预约</strong>：建议<strong>提前1-2周</strong>，旺季更早<br />
+- <strong>如套餐已满或不开</strong>：备选 ↓ 丸駒温泉旅馆 / 休暇村支笏湖 日帰り入浴</p>
+<p><strong>🌟 支笏湖周边推荐景点</strong>：<br />
+| 地点 | 时长 | 特色 |<br />
+|---|---|---|<br />
+| <strong>支笏湖游船</strong> | 30min | 日本透明度最高的湖，水中观察湖鱼 |<br />
+| <strong>苔の回廊</strong>（コケの回廊） | 30-45min | 火山熔岩苔藓峡谷，免费，需轻度徒步 |<br />
+| <strong>千岁川源头</strong>（湖畔散步） | 20min | 清澈见底的河水源头 |<br />
+| 千歳水族馆 | 1h | 备选，如有兴趣可替换苔の回廊 |</p>
+<p><strong>🌟 支笏湖温泉街人气晚餐推荐</strong>：<br />
+| 餐厅 | 特色 | 价格 |<br />
+|---|---|---|<br />
+| <strong>レストラン明月</strong> | 姫鱒料理（支笏湖特产，公鱼塩烧/天妇罗） | ¥1,500-3,000/人 |<br />
+| <strong>食堂レストハウス支笏湖</strong> | 当地家常+海鲜定食 | ¥1,200-2,500/人 |<br />
+| <strong>支笏湖モラップ</strong> | 湖景餐厅，海鲜+牛肉 | ¥2,000-4,000/人 |</p>
+<p><strong>⚠️ 时间提醒</strong>：18:30返程，20:30到留寿都，<strong>烟花可能错过</strong>。如想看烟花，把晚餐时间提前到16:30-17:30，17:30返程。</p>
+<p><strong>关于"看烟花"的判断</strong>：<br />
+- Day 1-7 都有烟花（每晚），错过 Day 5 一晚不影响<br />
+- 在支笏湖吃完晚餐慢慢回来更轻松；早回赶烟花反而紧张<br />
+- <strong>推荐：放弃 Day 5 烟花，享受支笏湖</strong></p>
+<hr />
+<h3 id="sec-10--day-6717-周五上午-mount-isola-登山--下午花田牧场组合">🥾 Day 6（7/17 周五）：上午 Mount Isola 登山 + 下午花田牧场组合</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:00-09:00</td>
+<td>早餐</td>
+<td></td>
+</tr>
+<tr>
+<td>09:30-09:50</td>
+<td>步行/接驳车至 East Mountain Gondola站</td>
+<td>度假村内</td>
+</tr>
+<tr>
+<td>10:00-10:15</td>
+<td><strong>缆车上山</strong>（约15min）</td>
+<td></td>
+</tr>
+<tr>
+<td>10:15-11:00</td>
+<td>山顶平台：羊蹄山+洞爷湖+二世谷山脉全景</td>
+<td>拍照、休息</td>
+</tr>
+<tr>
+<td>11:00-12:30</td>
+<td><strong>徒步下山</strong>（初级滑雪道改的步道）</td>
+<td>沿途观察松鼠、鸟、植物</td>
+</tr>
+<tr>
+<td>12:30-13:00</td>
+<td>度假村简餐</td>
+<td>快速</td>
+</tr>
+<tr>
+<td>13:00-13:30</td>
+<td>自驾→<strong>真狩花卉中心</strong>（约25km）</td>
+<td></td>
+</tr>
+<tr>
+<td>13:30-14:30</td>
+<td><strong>真狩花卉中心</strong>：百合花田+哈密瓜试吃+特产店</td>
+<td>7月百合花期</td>
+</tr>
+<tr>
+<td>14:30-15:00</td>
+<td>自驾→<strong>二世谷高桥牧场</strong>（约15km）</td>
+<td></td>
+</tr>
+<tr>
+<td>15:00-16:30</td>
+<td><strong>二世谷高桥牧场</strong>：薰衣草+羊蹄山打卡+冰淇淋+牛奶工坊+哈密瓜</td>
+<td>网红地</td>
+</tr>
+<tr>
+<td>16:30-17:15</td>
+<td>自驾返留寿都（约35km）</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30-20:00</td>
+<td>晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>烟花</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 Mount Isola 缆车（East Mountain Gondola）</strong>：<br />
+- <strong>预约</strong>：✅ <strong>不需要预约，现场买票</strong><br />
+- <strong>估算价格</strong>：成人单程 ¥1,500-2,000，往返 ¥2,500-3,000；儿童半价<br />
+- <strong>度假村住客可能有优惠</strong>（凭房卡）— 入住时问前台<br />
+- <strong>官网核实</strong>：rusutsu.com → Summer Activities → Gondola</p>
+<p><strong>🌟 难度对比</strong>（孩子家娃可轻松登深圳大南山）：<br />
+- 大南山：336m爬升 / 水泥阶梯 / 2-3h<br />
+- Mount Isola下山：300m<strong>下降</strong> / 土路+碎石 / 1-1.5h<br />
+- <strong>结论</strong>：比大南山轻松，妹妹累了可中途坐缆车回</p>
+<p><strong>装备清单</strong>：<br />
+- 长袖长裤、运动鞋、<strong>熊铃</strong>（活动柜台租）<br />
+- 防晒霜、驱虫液、水≥1L/人</p>
+<p><strong>🌟 真狩花卉中心（真狩フラワーセンター）</strong>：<br />
+- <strong>预约</strong>：✅ <strong>不需要预约，免费入园</strong><br />
+- <strong>特色</strong>：真狩村是日本铃兰百合主要产地，7月百合花期<br />
+- <strong>附加</strong>：园区有真狩特产直销（哈密瓜、土豆、洋葱），可试吃可买<br />
+- <strong>位置</strong>：真狩村，距留寿都25km<br />
+- <strong>官网</strong>：真狩村官网 town.makkari.lg.jp（核实开放时间，通常9:00-17:00）</p>
+<p><strong>🌟 二世谷高桥牧场（ニセコ高橋牧場）</strong>：<br />
+- <strong>预约</strong>：✅ <strong>不需要预约，免费入园</strong><br />
+- <strong>特色</strong>：<br />
+  - 网红打卡：<strong>薰衣草花田 + 羊蹄山背景</strong><br />
+  - <strong>Milk Kobo（牛乳工房）</strong>：北海道知名冰淇淋（必吃）<br />
+  - 牛奶布丁、芝士蛋糕、卷心菜面包等乳制品名店<br />
+  - PRATIVO 自助餐厅（蔬菜餐为主，可选）<br />
+  - 哈密瓜专卖区可试吃可买<br />
+- <strong>位置</strong>：二世谷町，距留寿都35km<br />
+- <strong>官网</strong>：takahashi-farm.com</p>
+<p><strong>🆗 灵活方案</strong>：<br />
+- <strong>方案A（默认）</strong>：真狩花卉中心 + 高桥牧场都跑（百合+薰衣草+哈密瓜，体验最完整）<br />
+- <strong>方案B（节省体力）</strong>：只去高桥牧场（更网红+冰淇淋更出名），下午13:30出发到牧场玩2-3h，16:30返回。<strong>适合妹妹累了或天气不好时</strong></p>
+<p><strong>⚠️ 强度提醒</strong>：登山+两处花田牧场，下午时间紧但够用。妹妹累了可砍真狩花卉中心。</p>
+<hr />
+<h3 id="sec-11">🥃 Day 7（7/18 周六）：余市NIKKA + 小樽（一日往返）</h3>
+<p><strong>总里程</strong>：留寿都→余市→小樽→留寿都 约 210km<br />
+<strong>全天驾驶</strong>：约 4h<br />
+<strong>核心策略</strong>：早出发，<strong>16:00前从小樽返程</strong>，避开山区夜路</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>07:30-08:30</td>
+<td>早餐+出发准备</td>
+<td>早起</td>
+</tr>
+<tr>
+<td>08:30-10:00</td>
+<td>自驾→<strong>余市NIKKA酒厂</strong>（约70km / 1.5h）</td>
+<td></td>
+</tr>
+<tr>
+<td>10:00-11:30</td>
+<td><strong>NIKKA余市蒸溜所 免费导览</strong>（已预约）</td>
+<td>大人试饮，孩子苹果汁</td>
+</tr>
+<tr>
+<td>11:30-12:00</td>
+<td>自驾→小樽（约25km / 30min）</td>
+<td></td>
+</tr>
+<tr>
+<td>12:00-13:00</td>
+<td>小樽午餐：<strong>柿崎商店海鲜丼</strong> 或寿司街</td>
+<td></td>
+</tr>
+<tr>
+<td>13:00-13:40</td>
+<td><strong>北一硝子三号馆</strong>：观看玻璃吹制现场（免费）</td>
+<td>不做DIY</td>
+</tr>
+<tr>
+<td>13:40-14:20</td>
+<td><strong>小樽音乐盒堂（オルゴール堂）</strong></td>
+<td>孩子最爱</td>
+</tr>
+<tr>
+<td>14:20-14:50</td>
+<td>小樽运河漫步、童话十字路口拍照</td>
+<td></td>
+</tr>
+<tr>
+<td>14:50-15:20</td>
+<td><strong>LeTAO 总店</strong> 芝士蛋糕+下午茶</td>
+<td></td>
+</tr>
+<tr>
+<td>15:30-17:30</td>
+<td>自驾返留寿都（约115km / 2h）</td>
+<td>天还亮</td>
+</tr>
+<tr>
+<td>17:30-18:00</td>
+<td>留寿都到达</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30-20:00</td>
+<td>度假村晚餐</td>
+<td></td>
+</tr>
+<tr>
+<td>20:30</td>
+<td>最后一晚烟花 🎆</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌟 余市NIKKA酒厂 免费导览</strong> ⚠️ <strong>必抢</strong>：<br />
+- ⚠️ <strong>6月15日上午9:15 JST 开放预约</strong><br />
+- <strong>预约路径</strong>：<br />
+  - 官网：nikka.com → "余市蒸溜所" → "見学予約"<br />
+  - <strong>强烈建议6/15当天9:00 JST 蹲守</strong><br />
+- <strong>价格</strong>：免费<br />
+- <strong>重要提醒</strong>：必须出示<strong>护照</strong>才能入场</p>
+<hr />
+<h3 id="sec-12">✈️ Day 8（7/19 周日）：留寿都晨间休闲 → 直奔机场</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:00-09:30</td>
+<td>慢享早餐</td>
+<td></td>
+</tr>
+<tr>
+<td>09:30-11:00</td>
+<td>度假村休闲：泡最后一次温泉 / 散步 / 收拾行李</td>
+<td>不离开度假村</td>
+</tr>
+<tr>
+<td>11:00</td>
+<td><strong>退房</strong>（留寿都7晚结束）</td>
+<td>如前台同意延迟到12:00更舒服</td>
+</tr>
+<tr>
+<td>11:00-13:00</td>
+<td>自驾→新千岁机场（约90km / 2h）</td>
+<td>直奔，不绕路</td>
+</tr>
+<tr>
+<td>13:00-13:30</td>
+<td>还车（<strong>注意加满油！</strong>）</td>
+<td></td>
+</tr>
+<tr>
+<td>13:30-15:00</td>
+<td>机场午餐+免税购物+休息</td>
+<td>留足时间</td>
+</tr>
+<tr>
+<td>15:55</td>
+<td>HX607 起飞</td>
+<td>已订</td>
+</tr>
+<tr>
+<td>20:45</td>
+<td>抵达香港</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-13">五、住宿规划</h2>
+<h3 id="sec-14">留寿都度假村（7晚 7/12-7/18，已订）</h3>
+<ul>
+<li><strong>预订总价</strong>：¥4,000人民币（7晚共，4人）</li>
+<li><strong>行动</strong>：保持当前预订即可</li>
+</ul>
+<hr />
+<h2 id="sec-15">六、所有预约事项汇总（按紧急度）</h2>
+<h3 id="sec-16">🔴 紧急（本周内）</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>预约路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HK 入境处确认高才续签</strong></td>
+<td>电话 <strong>3763 8080</strong></td>
+<td>决定能否拿IDP，自驾行程的卡点</td>
+</tr>
+<tr>
+<td><strong>下单租车</strong></td>
+<td>携程 → 租车 → 日本 → 新千岁机场</td>
+<td>¥2,500，已确认</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-17">🟡 5月底前</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>预约路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>水之謌 日帰りプラン</strong></td>
+<td>mizunouta.jp 或 电话 <strong>+81-123-25-2211</strong> 或 KKday</td>
+<td>提前1-2周，旺季更早</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-18">🟢 6月（重点）</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>预约路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>🚨 余市NIKKA导览</strong></td>
+<td>nikka.com → 余市蒸溜所 → 見学予約</td>
+<td><strong>6/15 上午9:15 JST 开放即抢</strong></td>
+</tr>
+<tr>
+<td><strong>留寿都 SPA</strong>（可选）</td>
+<td>rusutsu.com → Activities → Spa；或入住后前台</td>
+<td>入住前1周或现场预约</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-19">✅ 不需要预约（现场买票/免费）</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rusutsu Adventure Park 游乐园（Day 3）</strong></td>
+<td>现场买一日通票，¥6,200/成人 ¥4,800/儿童</td>
+</tr>
+<tr>
+<td>Mount Isola 缆车（Day 6）</td>
+<td>现场买票，住客可能有优惠</td>
+</tr>
+<tr>
+<td>洞爷湖游船（Day 4）</td>
+<td>现场买票</td>
+</tr>
+<tr>
+<td><strong>真狩花卉中心（Day 6）</strong></td>
+<td>免费入园</td>
+</tr>
+<tr>
+<td><strong>二世谷高桥牧场（Day 6）</strong></td>
+<td>免费入园</td>
+</tr>
+<tr>
+<td>北一硝子工坊（Day 7）</td>
+<td>免费观看</td>
+</tr>
+<tr>
+<td>小樽音乐盒堂（Day 7）</td>
+<td>免费参观</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vs V7.1 变化</strong>：<br />
+- ❌ 取消"真狩村哈密瓜采摘"预约（不去摘瓜，改去花卉中心+牧场买/试吃）<br />
+- ❌ 取消"昭和新山熊牧场"购票（不去）<br />
+- ✅ 新增"真狩花卉中心" + "二世谷高桥牧场"（都免费免预约）</p>
+<hr />
+<h2 id="sec-20">七、预算估算（4人，单位：人民币）</h2>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>金额</th>
+<th>数据来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>港日往返机票</td>
+<td>¥12,906</td>
+<td><strong>已订实价</strong></td>
+</tr>
+<tr>
+<td>留寿都7晚</td>
+<td>¥4,000</td>
+<td><strong>已订实价</strong></td>
+</tr>
+<tr>
+<td>租车7天</td>
+<td>¥2,500</td>
+<td><strong>用户实价</strong></td>
+</tr>
+<tr>
+<td>游乐园一日通票（4人）</td>
+<td>¥1,100</td>
+<td>估算（中置信）</td>
+</tr>
+<tr>
+<td>水之謌日帰りプラン（4人）</td>
+<td>¥800-1,200</td>
+<td>估算（中置信）</td>
+</tr>
+<tr>
+<td>加油+高速</td>
+<td>¥1,000-1,500</td>
+<td>估算（中置信，少跑熊牧场）</td>
+</tr>
+<tr>
+<td>留寿都内餐饮</td>
+<td>¥2,500-4,000</td>
+<td>估算（中置信，Day 5晚餐外吃）</td>
+</tr>
+<tr>
+<td>Day 4-7 外吃+机场餐</td>
+<td>¥2,500-3,500</td>
+<td>估算（中置信，含支笏湖人气晚餐）</td>
+</tr>
+<tr>
+<td>其他门票/活动</td>
+<td>¥1,500-2,500</td>
+<td>缆车+游船+冰淇淋+音乐盒</td>
+</tr>
+<tr>
+<td>哈密瓜买伴手</td>
+<td>¥200-500</td>
+<td>真狩/高桥牧场买</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>¥29,006-33,706</strong></td>
+<td>✅ 落在原预算 ¥30,000-34,000 区间内</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vs V7.1 变化</strong>：<br />
+- 减项：熊牧场门票（¥150）+ 真狩村哈密瓜采摘费（¥300）<br />
+- 加项：支笏湖人气晚餐外吃（¥200-400）+ 高桥牧场冰淇淋哈密瓜（¥100-200）<br />
+- <strong>总体持平</strong></p>
+<p><strong>进一步压缩空间</strong>（如想压到¥27,000）：<br />
+- 留寿都餐食改买便利店/罗森解决早晚餐 → 省¥1,500-2,500<br />
+- SPA不做 → 省¥1,000+<br />
+- Day 6 不去真狩花卉中心 → 省¥100油费</p>
+<hr />
+<h2 id="sec-21">八、IDP 风险（关键卡点 — 本周必须解决）</h2>
+<p><strong>当前状况</strong>：<br />
+- 用户HK高才已过期约6个月<br />
+- 内地驾照→HK驾照→HK IDP 路径，需要HK居留权<br />
+- IDP是日本租车自驾的法定要求</p>
+<p><strong>⚠️ 本周必须做</strong>：<br />
+1. 致电 HK 入境处 <strong>3763 8080</strong> 询问高才续签可行性<br />
+2. 不能续签的备选：朋友代办（不推荐）/ 专车司机 / 公共交通</p>
+<p><strong>这件事不解决，整个自驾行程不成立。</strong></p>
+<hr />
+<h2 id="sec-22">九、应急/注意事项</h2>
+<h3 id="sec-23">驾驶</h3>
+<ul>
+<li><strong>左舵右行→右舵左行</strong>：前2小时极易上错车道，机场停车场练习5min</li>
+<li><strong>熊出没</strong>：山区/林道注意标识，登山务必带熊铃</li>
+<li><strong>加油</strong>：日本加油站多为人工，记会"满タン現金"= 加满+现金</li>
+<li><strong>Day 5/Day 7 返程</strong>：争取在天黑前（19:00）到留寿都</li>
+</ul>
+<h3 id="sec-24">孩子</h3>
+<ul>
+<li><strong>安全座椅</strong>：日本法律6岁以下必须使用，租车时务必加配</li>
+<li><strong>晕车药</strong>：山路多，备好</li>
+<li><strong>零食水</strong>：包里常备</li>
+<li><strong>雨天预案</strong>：登山日如下雨改室内活动；花田如下雨可改去 PRATIVO 餐厅吃饭</li>
+</ul>
+<h3 id="sec-25">钱包</h3>
+<ul>
+<li>现金 ¥30,000-50,000 日元（约¥1,500-2,500人民币）</li>
+<li>VISA/Master 大部分接受，部分小店只收现金</li>
+</ul>
+<h3 id="sec-26">日期/时区</h3>
+<ul>
+<li>日本JST = 北京时间+1小时</li>
+<li>暑假7月日本天黑约19:00</li>
+</ul>
+<hr />
+<h2 id="sec-27">十、行李建议</h2>
+<h3 id="sec-28">必带</h3>
+<ul>
+<li>护照+IDP+驾照（<strong>正本</strong>）</li>
+<li>信用卡（VISA/Master）</li>
+<li>日元现金 ¥30,000-50,000</li>
+<li>手机+充电器+转换插头（A型双扁脚）</li>
+<li>常用药（感冒/退烧/肠胃/晕车/创可贴）</li>
+<li>防晒霜、驱虫液、雨衣/折叠伞</li>
+</ul>
+<h3 id="sec-29">装备</h3>
+<ul>
+<li>登山日（Day 6）：长袖长裤+运动鞋</li>
+<li>游乐园+泳池日（Day 2、Day 3）：泳衣+泳镜</li>
+<li>泡汤日：可裸入，毛巾酒店有</li>
+</ul>
+<h3 id="sec-30">孩子专项</h3>
+<ul>
+<li>喜欢的小玩具/书</li>
+<li>备用衣裤</li>
+<li>零食</li>
+</ul>
+<hr />
+<h2 id="sec-31">十一、本方案的核心判断</h2>
+<ol>
+<li><strong>节奏</strong>：4天🟢低 + 4天🟡中 + 0天高，比V7.1更松（Day 5 不跑熊牧场）</li>
+<li><strong>预算</strong>：¥29,000-33,700，落在 ¥30,000-34,000 区间</li>
+<li><strong>预约风险</strong>：余市NIKKA 6/15 抢预约最关键</li>
+<li><strong>法律风险</strong>：IDP 必须本周解决</li>
+<li><strong>现场确认</strong>：入住后向前台问清楚8件事</li>
+</ol>
+<hr />
+<h2 id="sec-32">十二、V7.1 → V7.2 变化总览</h2>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>V7.1</th>
+<th>V7.2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>水之謌泡汤+自助 → 昭和新山熊牧场</td>
+<td><strong>水之謌泡汤+自助 → 支笏湖周边深度+人气晚餐</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>上午登山 + 下午细川农园哈密瓜+京极喷出公园</td>
+<td><strong>上午登山 + 下午真狩花卉中心+二世谷高桥牧场</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心理由</strong>：<br />
+- Day 5 砍熊牧场理由：用户判断"没啥意思"，改成支笏湖深度更舒服<br />
+- Day 6 改花田牧场理由：哈密瓜在花卉中心+牧场都能试吃买，不需专门去摘；新增百合（真狩花卉中心）+薰衣草打卡（高桥牧场）</p>
+<hr />
+<p><strong>更新时间</strong>：2026/05/31<br />
+<strong>版本</strong>：V7.2 修订版<br />
+<strong>下一步行动</strong>：<br />
+1. 本周内：致电 HK 入境处 + 携程下单租车<br />
+2. 5月底前：网订水之謌<br />
+3. 6/15 上午：抢余市NIKKA导览<br />
+4. Check in 当天：向前台确认章节三的8件事</p>
+    </article>
+
+    <footer>
+      <p>本文档由 AI 协作生成 · 生成时间：2026-06-05 14:45</p>
+      <p>出发：香港 · 大本营：留寿都度假村7晚连住</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // ===== 目录折叠/手风琴交互 =====
+  document.addEventListener('DOMContentLoaded', function() {
+    const tocItems = document.querySelectorAll('.toc-item');
+
+    tocItems.forEach(function(item) {
+      const h2Link = item.querySelector('.toc-h2');
+      if (!h2Link) return;
+
+      h2Link.addEventListener('click', function(e) {
+        const isExpanded = item.classList.contains('expanded');
+
+        // 手风琴：先折叠所有
+        tocItems.forEach(function(other) {
+          other.classList.remove('expanded');
+        });
+
+        // 如果当前未展开，则展开它（再次点击同一项则收起）
+        if (!isExpanded) {
+          item.classList.add('expanded');
+        }
+        // 跳转锚点的默认行为保留，无需 preventDefault
+      });
+    });
+
+    // ===== 滚动时自动高亮当前章节 =====
+    const headings = document.querySelectorAll('article.content h2[id], article.content h3[id]');
+    const tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+
+    function updateActive() {
+      let current = '';
+      const scrollPos = window.scrollY + 120;
+      headings.forEach(function(h) {
+        if (h.offsetTop <= scrollPos) {
+          current = h.id;
+        }
+      });
+      tocLinks.forEach(function(link) {
+        link.classList.remove('active');
+        const parentItem = link.closest('.toc-item');
+        if (parentItem && link.classList.contains('toc-h2')) {
+          parentItem.classList.remove('active');
+        }
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+          if (parentItem) parentItem.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+  });
+</script>
+
+</body>
+</html>
